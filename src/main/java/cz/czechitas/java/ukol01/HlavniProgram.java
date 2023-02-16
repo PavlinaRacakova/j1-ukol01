@@ -32,7 +32,7 @@ public class HlavniProgram {
         //CAST 3 A 4:
 
         //prasátko
-       /* zofka.penUp();
+        zofka.penUp();
         otocSe();
         zofka.move(200);
         otocSe();
@@ -48,7 +48,6 @@ public class HlavniProgram {
 
         //cyklus pro domecky nahore
         for (int i = 0; i < 5; i++) {
-
             zofka.penUp();
 
             if (prvniDomecek){
@@ -86,18 +85,24 @@ public class HlavniProgram {
         zofka.turnRight(90);
         zofka.move(50);
         zofka.penDown();
-        nakresliSlunicko(10);*/
+        nakresliSlunicko(10);
 
         //písmena
-        //zofka.turnLeft(90);
 
+        zofka.penUp();
+        zofka.move(80);
+        zofka.turnRight(90);
+        zofka.move(60);
+        otocSe();
+        zofka.penDown();
         nakresliP();
         nakresliA();
-
-        nakresliL();
-        nakresliA();
         nakresliV();
+        nakresliL();
+        nakresliI();
+        nakresliN();
         nakresliA();
+
 
     }
 
@@ -263,8 +268,45 @@ public class HlavniProgram {
         otocSe();
         udelejRovnouCaru();
         zofka.turnLeft(90);
-        zofka.move(60);
+        zofka.move(50);
         zofka.penUp();
+        zofka.move(10);
+        presunSeKDalsimuPismenu();
+    }
+
+    public void nakresliI(){
+        zofka.turnRight(90);
+        zofka.move(20);
+        zofka.turnLeft(90);
+        zofka.penDown();
+        udelejRovnouCaru();
+        zofka.turnRight(45);
+        zofka.penUp();
+        zofka.move(20);
+        zofka.penDown();
+        zofka.move(20);
+        otocSe();
+        zofka.move(20);
+        zofka.penUp();
+        zofka.move(20);
+        zofka.turnLeft(45);
+        udelejRovnouCaru();
+        zofka.turnLeft(90);
+        zofka.move(20);
+        presunSeKDalsimuPismenu();
+    }
+
+    public void nakresliN(){
+        zofka.penDown();
+        udelejRovnouCaru();
+        zofka.turnRight(150);
+        zofka.move(90);
+        zofka.turnLeft(150);
+        udelejRovnouCaru();
+        zofka.penUp();
+        otocSe();
+        udelejRovnouCaru();
+        zofka.turnLeft(90);
         zofka.move(10);
         presunSeKDalsimuPismenu();
     }
