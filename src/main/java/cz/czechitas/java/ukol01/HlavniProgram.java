@@ -4,320 +4,324 @@ import cz.czechitas.java.ukol01.engine.*;
 
 public class HlavniProgram {
 
-    private Turtle zofka;
-    private boolean prvniDomecek = true;
+    private Turtle turtle;
 
     public void start() {
-        zofka = new Turtle();
+        turtle = new Turtle();
 
-        //CAST 1 A 2:
+        //PARTS 1 AND 2:
 
-        /*nakresliPrasatko();
-        zofka.penUp();
-        zofka.move(100);
-        zofka.penDown();
-        nakresliOsmiuhelnik(50);
-        zofka.turnLeft(135);
-        zofka.penUp();
-        zofka.move(400);
-        zofka.penDown();
-        nakresliKolecko(15);
-        zofka.penUp();
-        zofka.move(50);
-        zofka.turnLeft(90);
-        zofka.move(200);
-        zofka.penDown();
-        nakresliSlunicko(30);*/
+        /*
+        drawPiglet();
+        turtle.penUp();
+        turtle.move(100);
+        turtle.penDown();
+        drawOctagon(50);
+        turtle.turnLeft(135);
+        turtle.penUp();
+        turtle.move(400);
+        turtle.penDown();
+        drawCircle(15);
+        turtle.penUp();
+        turtle.move(50);
+        turtle.turnLeft(90);
+        turtle.move(200);
+        turtle.penDown();
+        drawSun(30);
+        */
 
-        //CAST 3 A 4:
+        //PARTS 3 AND 4:
 
-        //prasátko
-        zofka.penUp();
-        otocSe();
-        zofka.move(200);
-        otocSe();
-        zofka.penDown();
-        nakresliPrasatko();
+        //piglet
+        turtle.penUp();
+        turnAround();
+        turtle.move(200);
+        turnAround();
+        turtle.penDown();
+        drawPiglet();
 
-        //prvni domecek dole
-        zofka.turnRight(45);
-        zofka.penUp();
-        zofka.move(150);
-        zofka.penDown();
-        nakresliDomecek();
+        //first little house
+        turtle.turnRight(45);
+        turtle.penUp();
+        turtle.move(150);
+        turtle.penDown();
+        drawLittleHouse();
 
-        //cyklus pro domecky nahore
+        //five little houses on top
+        drawFiveLittleHouses();
+
+        //last little house
+        turtle.turnRight(45);
+        turtle.penUp();
+        turtle.move(180);
+        turtle.turnRight(90);
+        goShorterSideOfRectangle();
+        turnAround();
+        turtle.penDown();
+        drawLittleHouse();
+
+        //sun
+        turnAround();
+        turtle.penUp();
+        goLongerSideOfRectangle();
+        turtle.turnRight(45);
+        turtle.move(250);
+        turtle.turnRight(90);
+        turtle.move(50);
+        turtle.penDown();
+        drawSun(10);
+
+        //letters
+        turtle.penUp();
+        turtle.move(80);
+        turtle.turnRight(90);
+        turtle.move(60);
+        turnAround();
+        turtle.penDown();
+        drawP();
+        drawA();
+        drawV();
+        drawL();
+        drawI();
+        drawN();
+        drawA();
+    }
+
+    private void drawFiveLittleHouses() {
+        boolean firstLittleHouse = true;
+
         for (int i = 0; i < 5; i++) {
-            zofka.penUp();
+            turtle.penUp();
 
-            if (prvniDomecek){
-                zofka.turnLeft(135);
-                zofka.move(180);
-                zofka.turnLeft(90);
-                jdiKratsiStranuObdelniku();
-                prvniDomecek = false;
+            if (firstLittleHouse) {
+                turtle.turnLeft(135);
+                turtle.move(180);
+                turtle.turnLeft(90);
+                goShorterSideOfRectangle();
+                firstLittleHouse = false;
             } else {
-                zofka.turnRight(135);
-                zofka.move(200);
+                turtle.turnRight(135);
+                turtle.move(200);
             }
 
-            otocSe();
-            zofka.penDown();
-            nakresliDomecek();
+            turnAround();
+            turtle.penDown();
+            drawLittleHouse();
         }
+    }
 
-        //druhý domecek dole
-        zofka.turnRight(45);
-        zofka.penUp();
-        zofka.move(180);
-        zofka.turnRight(90);
-        jdiKratsiStranuObdelniku();
-        otocSe();
-        zofka.penDown();
-        nakresliDomecek();
+    public void drawPiglet() {
 
-        //slunícko
-        otocSe();
-        zofka.penUp();
-        jdiDelsiStranuObdelniku();
-        zofka.turnRight(45);
-        zofka.move(250);
-        zofka.turnRight(90);
-        zofka.move(50);
-        zofka.penDown();
-        nakresliSlunicko(10);
+        //body
+        drawRectangle();
 
-        //písmena
+        //head
+        drawTriangle();
 
-        zofka.penUp();
-        zofka.move(80);
-        zofka.turnRight(90);
-        zofka.move(60);
-        otocSe();
-        zofka.penDown();
-        nakresliP();
-        nakresliA();
-        nakresliV();
-        nakresliL();
-        nakresliI();
-        nakresliN();
-        nakresliA();
+        //legs
+        turtle.turnRight(135);
+        goShorterSideOfRectangle();
+        drawLegs();
+        turtle.turnRight(135);
+        goLongerSideOfRectangle();
+        turtle.turnRight(90);
+        drawLegs();
 
+        //tail
+        turtle.turnRight(45);
+        goShorterSideOfRectangle();
+        turtle.turnRight(45);
+        turtle.move(20);
+        drawCircle(4);
+        turtle.move(30);
 
     }
 
-    public void nakresliPrasatko(){
-
-        //nakreslí tělo
-        udelejObdelnik();
-
-        //nakreslí hlavu
-        udelejTrojuhelnik();
-
-        //nakreslí nohy
-        zofka.turnRight(135);
-        jdiKratsiStranuObdelniku();
-        udelejNohy();
-        zofka.turnRight(135);
-        jdiDelsiStranuObdelniku();
-        zofka.turnRight(90);
-        udelejNohy();
-
-        //nakreslí ocásek
-        zofka.turnRight(45);
-        jdiKratsiStranuObdelniku();
-        zofka.turnRight(45);
-        zofka.move(20);
-        nakresliKolecko(4);
-        zofka.move(30);
-
+    public void drawLittleHouse() {
+        drawRectangle();
+        drawTriangle();
     }
 
-    public void nakresliDomecek(){
-        udelejObdelnik();
-        udelejTrojuhelnik();
+    public void goShorterSideOfRectangle() {
+        turtle.move(70);
     }
 
-    public void jdiKratsiStranuObdelniku(){
-        zofka.move(70);
+    public void goLongerSideOfRectangle() {
+        turtle.move(90);
     }
 
-    public void jdiDelsiStranuObdelniku(){
-        zofka.move(90);
+    public void turnAround() {
+        turtle.turnRight(180);
     }
 
-    public void otocSe(){
-        zofka.turnRight(180);
+    public void drawTriangle() {
+        turtle.turnLeft(45);
+        turtle.move(50);
+        turtle.turnRight(90);
+        turtle.move(50);
     }
 
-    public void udelejTrojuhelnik(){
-        zofka.turnLeft(45);
-        zofka.move(50);
-        zofka.turnRight(90);
-        zofka.move(50);
-    }
-
-    public void udelejObdelnik(){
+    public void drawRectangle() {
         for (int i = 0; i < 2; i++) {
-            jdiKratsiStranuObdelniku();
-            zofka.turnRight(90);
-            jdiDelsiStranuObdelniku();
-            zofka.turnRight(90);
+            goShorterSideOfRectangle();
+            turtle.turnRight(90);
+            goLongerSideOfRectangle();
+            turtle.turnRight(90);
         }
     }
 
-    public void udelejNohy(){
-        zofka.turnRight(45);
-        zofka.move(30);
-        otocSe();
-        zofka.move(30);
-        zofka.turnRight(90);
-        zofka.move(30);
-        otocSe();
-        zofka.move(30);
+    public void drawLegs() {
+        turtle.turnRight(45);
+        turtle.move(30);
+        turnAround();
+        turtle.move(30);
+        turtle.turnRight(90);
+        turtle.move(30);
+        turnAround();
+        turtle.move(30);
     }
 
-    public void nakresliKolecko(int velikost){
+    public void drawCircle(int size) {
         for (int i = 0; i < 18; i++) {
-            zofka.move(velikost);
-            zofka.turnRight(20);
+            turtle.move(size);
+            turtle.turnRight(20);
         }
     }
 
-    public void nakresliOsmiuhelnik(int velikost){
+    public void drawOctagon(int size) {
         for (int i = 0; i < 8; i++) {
-            zofka.move(velikost);
-            zofka.turnRight(45);
+            turtle.move(size);
+            turtle.turnRight(45);
         }
     }
 
-    public void nakresliSlunicko(int velikost){
-        int pocitadloRamen = 0;
+    public void drawSun(int size) {
+        int rayCounter = 0;
         for (int i = 0; i < 18; i++) {
-            zofka.move(velikost);
-            if (pocitadloRamen % 2 == 0){
-                zofka.turnLeft(80);
-                zofka.move(velikost);
-                zofka.turnLeft(180);
-                zofka.move(velikost);
-                zofka.turnLeft(80);
+            turtle.move(size);
+            if (rayCounter % 2 == 0) {
+                turtle.turnLeft(80);
+                turtle.move(size);
+                turtle.turnLeft(180);
+                turtle.move(size);
+                turtle.turnLeft(80);
             } else {
-                zofka.turnRight(20);
+                turtle.turnRight(20);
             }
-           pocitadloRamen++;
+            rayCounter++;
         }
     }
 
-    public void nakresliP(){
-        zofka.penDown();
-        udelejRovnouCaru();
-        zofka.turnRight(90);
+    public void drawP() {
+        turtle.penDown();
+        drawStraightLine();
+        turtle.turnRight(90);
         for (int i = 0; i < 9; i++) {
-            zofka.move(8);
-            zofka.turnRight(20);
+            turtle.move(8);
+            turtle.turnRight(20);
         }
-        zofka.penUp();
-        zofka.turnLeft(135);
-        zofka.move(50);
-        zofka.turnLeft(45);
-        presunSeKDalsimuPismenu();
+        turtle.penUp();
+        turtle.turnLeft(135);
+        turtle.move(50);
+        turtle.turnLeft(45);
+        moveToTheNextLetter();
     }
 
-    public void nakresliA(){
-        zofka.penDown();
-        zofka.turnRight(20);
-        udelejRovnouCaru();
-        zofka.turnRight(135);
-        zofka.move(40);
-        zofka.turnRight(110);
-        zofka.move(30);
-        otocSe();
-        zofka.move(30);
-        zofka.turnRight(70);
-        zofka.move(40);
-        zofka.turnLeft(65);
-        zofka.penUp();
-        presunSeKDalsimuPismenu();
+    public void drawA() {
+        turtle.penDown();
+        turtle.turnRight(20);
+        drawStraightLine();
+        turtle.turnRight(135);
+        turtle.move(40);
+        turtle.turnRight(110);
+        turtle.move(30);
+        turnAround();
+        turtle.move(30);
+        turtle.turnRight(70);
+        turtle.move(40);
+        turtle.turnLeft(65);
+        turtle.penUp();
+        moveToTheNextLetter();
     }
 
-    public void nakresliV(){
-        boolean prvniRameno = true;
-        zofka.turnRight(90);
-        zofka.move(40);
-        zofka.penDown();
+    public void drawV() {
+        boolean firstArm = true;
+        turtle.turnRight(90);
+        turtle.move(40);
+        turtle.penDown();
         for (int i = 0; i < 2; i++) {
-            if (prvniRameno){
-                zofka.turnLeft(110);
-                prvniRameno = false;
+            if (firstArm) {
+                turtle.turnLeft(110);
+                firstArm = false;
             } else {
-                zofka.turnLeft(135);
+                turtle.turnLeft(135);
             }
-            udelejRovnouCaru();
-            otocSe();
-            udelejRovnouCaru();
+            drawStraightLine();
+            turnAround();
+            drawStraightLine();
         }
-        zofka.turnLeft(115);
-        zofka.penUp();
-        zofka.move(50);
-        presunSeKDalsimuPismenu();
+        turtle.turnLeft(115);
+        turtle.penUp();
+        turtle.move(50);
+        moveToTheNextLetter();
     }
 
-    public void nakresliL(){
-        zofka.penDown();
-        udelejRovnouCaru();
-        otocSe();
-        udelejRovnouCaru();
-        zofka.turnLeft(90);
-        zofka.move(50);
-        zofka.penUp();
-        zofka.move(10);
-        presunSeKDalsimuPismenu();
+    public void drawL() {
+        turtle.penDown();
+        drawStraightLine();
+        turnAround();
+        drawStraightLine();
+        turtle.turnLeft(90);
+        turtle.move(50);
+        turtle.penUp();
+        turtle.move(10);
+        moveToTheNextLetter();
     }
 
-    public void nakresliI(){
-        zofka.turnRight(90);
-        zofka.move(20);
-        zofka.turnLeft(90);
-        zofka.penDown();
-        udelejRovnouCaru();
-        zofka.turnRight(45);
-        zofka.penUp();
-        zofka.move(20);
-        zofka.penDown();
-        zofka.move(20);
-        otocSe();
-        zofka.move(20);
-        zofka.penUp();
-        zofka.move(20);
-        zofka.turnLeft(45);
-        udelejRovnouCaru();
-        zofka.turnLeft(90);
-        zofka.move(20);
-        presunSeKDalsimuPismenu();
+    public void drawI() {
+        turtle.turnRight(90);
+        turtle.move(20);
+        turtle.turnLeft(90);
+        turtle.penDown();
+        drawStraightLine();
+        turtle.turnRight(45);
+        turtle.penUp();
+        turtle.move(20);
+        turtle.penDown();
+        turtle.move(20);
+        turnAround();
+        turtle.move(20);
+        turtle.penUp();
+        turtle.move(20);
+        turtle.turnLeft(45);
+        drawStraightLine();
+        turtle.turnLeft(90);
+        turtle.move(20);
+        moveToTheNextLetter();
     }
 
-    public void nakresliN(){
-        zofka.penDown();
-        udelejRovnouCaru();
-        zofka.turnRight(150);
-        zofka.move(90);
-        zofka.turnLeft(150);
-        udelejRovnouCaru();
-        zofka.penUp();
-        otocSe();
-        udelejRovnouCaru();
-        zofka.turnLeft(90);
-        zofka.move(10);
-        presunSeKDalsimuPismenu();
+    public void drawN() {
+        turtle.penDown();
+        drawStraightLine();
+        turtle.turnRight(150);
+        turtle.move(90);
+        turtle.turnLeft(150);
+        drawStraightLine();
+        turtle.penUp();
+        turnAround();
+        drawStraightLine();
+        turtle.turnLeft(90);
+        turtle.move(10);
+        moveToTheNextLetter();
     }
 
-    public void presunSeKDalsimuPismenu(){
-        zofka.move(8);
-        zofka.turnLeft(90);
+    public void moveToTheNextLetter() {
+        turtle.move(8);
+        turtle.turnLeft(90);
     }
 
-    public void udelejRovnouCaru(){
-        zofka.move(80);
+    public void drawStraightLine() {
+        turtle.move(80);
     }
 
     public static void main(String[] args) {
